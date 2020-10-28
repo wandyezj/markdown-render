@@ -14,7 +14,7 @@ describe("headingOne", () => {
     test('multiple', () => {
 
         const input =`# one
-        # two`;
+# two`;
 
         const expected = `<h1>one</h1>
 <h1>two</h1>`;

@@ -7,7 +7,10 @@ function normalize(s: string): string {
 export function testHtml(markdownInput: string, htmlOutputExpected: string) {
     const htmlOutput = render(markdownInput, RenderOptionsHtml);
 
-    console.log(`[${htmlO}]`)
+    console.log(`
+[${htmlOutput}]
+----------------------------
+[${htmlOutputExpected}]`);
 
     expect(normalize(htmlOutput)).toBe(normalize(htmlOutputExpected));
 }

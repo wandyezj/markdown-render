@@ -54,7 +54,7 @@ export function render(markdown: string, options: Partial<RenderOptions> = {}): 
         }
         let currentLine = markdown.slice(lineStart, lineEnd)
         if (currentLine.startsWith(Tokens.headingOne)) {
-            const content = currentLine.substring(lineStart + Tokens.headingOne.length, lineEnd)
+            const content = currentLine.substring(Tokens.headingOne.length, lineEnd)
             const rendered = render.headingOne(content);
             output.push(rendered);
         }
@@ -66,14 +66,14 @@ export function render(markdown: string, options: Partial<RenderOptions> = {}): 
 
     // TODO: handle additional cases
 
-    const rendered = output.join("\n");;
+    const rendered = output.join("\n");
     return rendered;
 }
 
 
 // function test() {
-//     const md = `# test
-// # test`;
+//     const md = `# one
+// # two`;
 
 //     const output = render(md, RenderOptionsHtml);
 
