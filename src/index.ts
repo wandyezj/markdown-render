@@ -45,17 +45,24 @@ export function render(markdown: string, options: Partial<RenderOptions> = {}): 
     const output: string[] = [];
 
     // TODO: iterate through everything
+
     let lineStart = 0;
-    let lineEnd = markdown.indexOf(Tokens.newLine);
-    if (lineEnd < 0) {
-        lineEnd = markdown.length;
-    }
-    let currentLine = markdown.slice(lineStart, lineEnd)
-    if (currentLine.startsWith(Tokens.headingOne)) {
-        const content = currentLine.substring(lineStart + Tokens.headingOne.length, lineEnd)
-        const rendered = render.headingOne(content);
-        output.push(rendered);
-    }
+    do {
+        let lineEnd = markdown.indexOf(Tokens.newLine, lineStart);
+        if (lineEnd < 0) {
+            lineEnd = markdown.length;
+        }
+        let currentLine = markdown.slice(lineStart, lineEnd)
+        if (currentLine.startsWith(Tokens.headingOne)) {
+            const content = currentLine.substring(lineStart + Tokens.headingOne.length, lineEnd)
+            const rendered = render.headingOne(content);
+            output.push(rendered);
+        }
+
+        // advance
+        lineStart = lineEnd + 1;
+    } while( lineStart < markdown.length)
+
 
     // TODO: handle additional cases
 
@@ -64,16 +71,17 @@ export function render(markdown: string, options: Partial<RenderOptions> = {}): 
 }
 
 
-function test() {
-    const md = `# test`;
+// function test() {
+//     const md = `# test
+// # test`;
 
-    const output = render(md, RenderOptionsHtml);
+//     const output = render(md, RenderOptionsHtml);
 
-    console.log(`
-    ${md}
-    ------------------------------------------------------
-    ${output}
-    `);
-}
+//     console.log(`
+//     ${md}
+//     ------------------------------------------------------
+//     ${output}
+//     `);
+// }
 
-test();
+// test();

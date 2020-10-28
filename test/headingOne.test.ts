@@ -1,10 +1,27 @@
 import {testHtml} from "./external";
-test('headingOne', () => {
+describe("headingOne", () => {
+    test('single', () => {
 
-    const input =`# test`;
+        const input =`# test`;
+    
+        const expected = `<h1>test</h1>`;
+    
+        testHtml(input, expected);
+     
+    });
 
-    const expected = `<h1>test</h1>`;
+    
+    test('multiple', () => {
 
-    testHtml(input, expected);
- 
-});
+        const input =`# one
+        # two`;
+
+        const expected = `<h1>one</h1>
+<h1>two</h1>`;
+
+        testHtml(input, expected);
+    
+    });
+})
+
+
